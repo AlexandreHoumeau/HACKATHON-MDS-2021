@@ -47,8 +47,8 @@ router.post('/login', async (req, res) => {
   if(!comparePassword) return res.send('Email or password wrong');
 
   const token = jwt.sign({ _id: user._id }, 'secretString');
-  res.header('auth-token', token).send(token)
-  res.send(token)
+  // res.header('auth-token', token).send(token)
+  res.send({token: token})
 })
 
 module.exports = router;

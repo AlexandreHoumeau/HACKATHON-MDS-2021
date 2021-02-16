@@ -31,13 +31,32 @@ router.post(
           content: req.query.content,
           link: req.query.link,
           img: results.id,
-          created_by: req.query.created_by
+          created_by: req.query.created_by, 
+          style: req.query.style
         });
 
         newPost.save().then((doc) => {
           res.send(doc);
         });
       });
+    } catch (e) {
+      res.status(400).send(e);
+    }
+  },
+  (error, req, res) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+router.get(
+  "/search",
+  async (req, res) => {
+    try {
+      Post.find({ $text: { $search: req.body.keyword } })
+      .populate('created_by')
+      .then(elements => {
+        console.log(elements)
+      })
     } catch (e) {
       res.status(400).send(e);
     }

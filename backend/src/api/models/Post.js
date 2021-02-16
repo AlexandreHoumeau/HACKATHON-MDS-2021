@@ -6,13 +6,20 @@ const PostSchema = new Schema({
   title: {
     required: true,
     type: String,
+    text: true
   },
   content: {
     required: true,
     type: String,
+    text: true
   },
   link: {
     type: String,
+  },
+  style: {
+    type: String,
+    required: true,
+    text: true
   },
   img: {
     type: ObjectId,
@@ -20,7 +27,8 @@ const PostSchema = new Schema({
   },
   created_by: {
     type: ObjectId,
-    ref: "User"
+    ref: "User",
+    text: true
   },
   created_at: {
     type: Date,

@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./src --out-dir ./build",
-    "start": "nodemon --exec babel-node src/index.js",
-    "lint": "eslint ."
+    "server": "nodemon --exec babel-node src/index.js",
+    "lint": "eslint .",
+    "client": "npm start --prefix ../frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
+  "proxy": "http://localhost:5000",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,6 +22,8 @@
     "@babel/runtime": "^7.12.13",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
