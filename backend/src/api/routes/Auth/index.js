@@ -37,11 +37,10 @@ router.post('/login', async (req, res) => {
   //Validate request body
   const { error } = await loginValidation(req.body);
   if(error) return res.status(400).send(error.details[0].message)
-
   //Check if userr exist in DB
   const user = await User.findOne({email: req.body.email})
+  console.log(req.body.email)
   if(!user) return res.send('Email or password wrong');
-
   //Check if password is correct
   const comparePassword = await bcrypt.compare(req.body.password, user.password)
   if(!comparePassword) return res.send('Email or password wrong');
